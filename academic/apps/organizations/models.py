@@ -60,7 +60,6 @@ class Sponsor(Organization):
         _('Logo'),
 	upload_to=SPONSORS_DEFAULT_DIRECTORY,
         max_length=256,
-        format='Image',
         blank=True,
         null=True)
 

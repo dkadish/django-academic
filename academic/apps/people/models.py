@@ -159,7 +159,6 @@ class Person(models.Model):
         _('Profile picture'),
         max_length=200,
 	upload_to=PEOPLE_DEFAULT_DIRECTORY,
-        format='Image',
         default=PEOPLE_DEFAULT_PICTURE,
         blank=True,
         null=True)

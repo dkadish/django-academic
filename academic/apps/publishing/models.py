@@ -143,7 +143,6 @@ class Publication(models.Model):
         _('Attachment'),
 	upload_to=PUBLISHING_DEFAULT_DIRECTORY,
         max_length=256,
-        format='File',
         blank=True,
         null=True)
     notes = models.CharField(
@@ -168,7 +167,6 @@ class Publication(models.Model):
         _('Fulltext'),
 	upload_to=PUBLISHING_DEFAULT_DIRECTORY,
         max_length=256,
-        format='Document',
         blank=True,
         null=True)
     date_updated = models.DateField(
@@ -325,7 +323,6 @@ class ConferenceArticle(Publication):
         _('Presentation'),
 	upload_to=PUBLISHING_DEFAULT_DIRECTORY,
         max_length=256,
-        format='Document',
         blank=True,
         null=True)
     crossref = models.ForeignKey(
