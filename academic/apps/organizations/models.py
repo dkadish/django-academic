@@ -56,7 +56,7 @@ class Sponsor(Organization):
     order = models.PositiveSmallIntegerField(
         help_text='Give important sponsors a lower positive number',
         default=0)
-    logo = models.FileField(
+    logo = models.ImageField(
         _('Logo'),
 	upload_to=SPONSORS_DEFAULT_DIRECTORY,
         max_length=256,
@@ -64,7 +64,6 @@ class Sponsor(Organization):
         null=True)
 
     def _has_logo(self):
-        return not isinstance(self.logo.filesize, str) \
-            and self.logo.filesize > 0 \
-            and self.logo.filetype_checked == 'Image'
+        return not isinstance(self.logo.size, str) \
+            and self.logo.size > 0
     has_logo = property(_has_logo)

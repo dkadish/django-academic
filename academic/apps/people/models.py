@@ -155,7 +155,7 @@ class Person(models.Model):
         _('Short bio'),
         blank=True,
         null=True)
-    picture = models.FileField(
+    picture = models.ImageField(
         _('Profile picture'),
         max_length=200,
 	upload_to=PEOPLE_DEFAULT_DIRECTORY,
@@ -176,15 +176,14 @@ class Person(models.Model):
     def photo(self):
         if self.has_picture:
             return '<img src="%s" alt="%s">' % (
-                self.picture.url_thumbnail,
+                self.picture.url,
                 self.name)
         return _('(no photo)')
     photo.allow_tags = True
 
     def _has_picture(self):
-        return not isinstance(self.picture.filesize, str) \
-            and self.picture.filesize > 0 \
-            and self.picture.filetype_checked == 'Image'
+        return not isinstance(self.picture.size, str) \
+            and self.picture.size > 0
     has_picture = property(_has_picture)
 
     def __unicode__(self):
