@@ -122,14 +122,6 @@ INSTALLED_APPS = [
 
     # external
     'south',
-    'grappelli.dashboard',
-    'grappelli',
-    'filebrowser',
-    'academic.apps.organizations',
-    'academic.apps.people',
-    'academic.apps.publishing',
-    'academic.apps.projects',
-    'academic.apps.content',
     'academic',
     'django_extensions',
     'flatcontent',

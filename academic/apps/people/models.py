@@ -2,13 +2,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
 
-from filebrowser.fields import FileBrowseField
-try:
-    from south.modelsinspector import add_introspection_rules
-    add_introspection_rules([], ["^filebrowser\.fields\.FileBrowseField"])
-except:
-    pass
-
 from django_countries.fields import CountryField
 
 from datetime import date
@@ -162,10 +155,10 @@ class Person(models.Model):
         _('Short bio'),
         blank=True,
         null=True)
-    picture = FileBrowseField(
+    picture = models.FileField(
         _('Profile picture'),
         max_length=200,
-	directory=PEOPLE_DEFAULT_DIRECTORY,
+	upload_to=PEOPLE_DEFAULT_DIRECTORY,
         format='Image',
         default=PEOPLE_DEFAULT_PICTURE,
         blank=True,

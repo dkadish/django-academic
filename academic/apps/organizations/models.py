@@ -2,13 +2,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
 
-from filebrowser.fields import FileBrowseField
-try:
-    from south.modelsinspector import add_introspection_rules
-    add_introspection_rules([], ["^filebrowser\.fields\.FileBrowseField"])
-except:
-    pass
-
 from django_countries.fields import CountryField
 
 from academic.utils import *
@@ -63,9 +56,9 @@ class Sponsor(Organization):
     order = models.PositiveSmallIntegerField(
         help_text='Give important sponsors a lower positive number',
         default=0)
-    logo = FileBrowseField(
+    logo = models.FileField(
         _('Logo'),
-	directory=SPONSORS_DEFAULT_DIRECTORY,
+	upload_to=SPONSORS_DEFAULT_DIRECTORY,
         max_length=256,
         format='Image',
         blank=True,

@@ -2,14 +2,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
 
-from filebrowser.fields import FileBrowseField
-
-try:
-    from south.modelsinspector import add_introspection_rules
-    add_introspection_rules([], ["^filebrowser\.fields\.FileBrowseField"])
-except:
-    pass
-
 from academic.settings import *
 
 class Download(models.Model):
@@ -22,9 +14,9 @@ class Download(models.Model):
     description = models.TextField(
         blank=True,
         null=True)
-    file = FileBrowseField(
+    file = models.FileField(
         _('File'),
-	directory=DOWNLOADS_DEFAULT_DIRECTORY,
+	upload_to=DOWNLOADS_DEFAULT_DIRECTORY,
         max_length=256,
         blank=True,
         null=True)

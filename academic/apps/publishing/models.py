@@ -5,12 +5,6 @@ from django.template.defaultfilters import slugify
 from django_countries.fields import CountryField
 
 from model_utils.managers import InheritanceManager
-from filebrowser.fields import FileBrowseField
-try:
-    from south.modelsinspector import add_introspection_rules
-    add_introspection_rules([], ["^filebrowser\.fields\.FileBrowseField"])
-except:
-    pass
 
 from academic.settings import *
 from academic.utils import *
@@ -145,9 +139,9 @@ class Publication(models.Model):
         through='Authorship',
         blank=True,
         null=True)
-    attachment = FileBrowseField(
+    attachment = models.FileField(
         _('Attachment'),
-	directory=PUBLISHING_DEFAULT_DIRECTORY,
+	upload_to=PUBLISHING_DEFAULT_DIRECTORY,
         max_length=256,
         format='File',
         blank=True,
@@ -170,9 +164,9 @@ class Publication(models.Model):
         _('Abstract'),
         blank=True,
         null=True)
-    fulltext = FileBrowseField(
+    fulltext = models.FileField(
         _('Fulltext'),
-	directory=PUBLISHING_DEFAULT_DIRECTORY,
+	upload_to=PUBLISHING_DEFAULT_DIRECTORY,
         max_length=256,
         format='Document',
         blank=True,
@@ -327,9 +321,9 @@ class ConferenceArticle(Publication):
     class Meta:
         verbose_name_plural = _('Conference papers')
         verbose_name = _('Conference paper')
-    presentation = FileBrowseField(
+    presentation = models.FileField(
         _('Presentation'),
-	directory=PUBLISHING_DEFAULT_DIRECTORY,
+	upload_to=PUBLISHING_DEFAULT_DIRECTORY,
         max_length=256,
         format='Document',
         blank=True,
