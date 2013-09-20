@@ -4,7 +4,7 @@ from django.core.validators import RegexValidator
 from django.template.defaultfilters import slugify
 from django_countries.fields import CountryField
 
-from model_utils.models import InheritanceCastModel
+from model_utils.managers import InheritanceManager
 from filebrowser.fields import FileBrowseField
 try:
     from south.modelsinspector import add_introspection_rules
@@ -14,8 +14,8 @@ except:
 
 from academic.settings import *
 from academic.utils import *
-from academic.organizations.models import *
-from academic.people.models import *
+from academic.apps.organizations.models import *
+from academic.apps.people.models import *
 
 
 class Conference(models.Model):
@@ -111,7 +111,7 @@ class ConferenceEdition(models.Model):
         super(ConferenceEdition, self).save(**kwargs)
 
 
-class Publication(InheritanceCastModel):
+class Publication(models.Model):
     """
     A scientific publication.
     """
@@ -187,6 +187,8 @@ class Publication(InheritanceCastModel):
         unique=True,
         max_length=512,
         db_index=True)
+    
+    objects = InheritanceManager()
 
     def _get_first_author(self):
         authorships = self.authorship_set.all()

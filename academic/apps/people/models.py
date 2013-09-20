@@ -15,7 +15,7 @@ from datetime import date
 
 from academic.settings import *
 from academic.utils import *
-from academic.organizations.models import *
+from academic.apps.organizations.models import *
 
 class Rank(models.Model):
     """

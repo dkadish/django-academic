@@ -4,7 +4,7 @@
 '''
 from django.views.generic.list import ListView
 
-from academic.people.models import Person
+from .models import Person
 
 class PeopleListView(ListView):
     def get_context_data(self, **kwargs):

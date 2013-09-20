@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from academic.people.models import Person
+from academic.apps.people.models import Person
 from django.utils.encoding import smart_unicode, smart_str
 
 from optparse import make_option

@@ -3,7 +3,7 @@ from django import forms
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from academic.projects.models import *
+from .models import *
 from academic.settings import *
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -49,10 +49,10 @@ class ProjectAdmin(admin.ModelAdmin):
 admin.site.register(Project, ProjectAdmin)
 
 class TopicAdmin(admin.ModelAdmin):
-    class Media:
-        js = (
-            TINYMCE_MCE_JS,
-            TINYMCE_SETUP_JS, )
+#     class Media:
+#         js = (
+#             TINYMCE_MCE_JS,
+#             TINYMCE_SETUP_JS, )
     prepopulated_fields = {
 	'slug': ('title',)
     }

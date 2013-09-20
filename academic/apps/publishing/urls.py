@@ -6,8 +6,8 @@ from django.views.generic.list import ListView
 from academic.views import PlainTextDetailView
 from academic.views import PlainTextListView
 
-from academic.publishing.models import *
-from academic.publishing.views import PublicationListView
+from .models import *
+from .views import PublicationListView
 
 urlpatterns = patterns(
     '',

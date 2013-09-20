@@ -4,9 +4,9 @@ from django.core.validators import RegexValidator
 
 from academic.utils import *
 
-from academic.content.models import *
-from academic.people.models import *
-from academic.publishing.models import *
+from academic.apps.content.models import *
+from academic.apps.people.models import *
+from academic.apps.publishing.models import *
 
 class HighlightedTopicManager(models.Manager):
     def get_query_set(self):

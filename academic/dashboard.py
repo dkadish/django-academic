@@ -9,18 +9,18 @@ class CustomIndexDashboard(Dashboard):
                     title=_('People and organizations'),
                     column=1,
                     models=[
-                        'academic.people.*',
-                        'academic.organizations.*',],
+                        'academic.apps.people.*',
+                        'academic.apps.organizations.*',],
                     ),
                 modules.ModelList(
 		    title=_('Publishing'),
                     column=1,
-		    models=['academic.publishing.*',],
+		    models=['academic.apps.publishing.*',],
                     ),
                 modules.ModelList(
 		    title=_('Projects'),
                     column=1,
-		    models=('academic.projects.*',),
+		    models=('academic.apps.projects.*',),
                     ),
 		modules.LinkList(
 		    title=_('Media Management'),

@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 from django.views.decorators.cache import cache_page
 from django.views.generic.list import ListView
 
-from academic.organizations.models import *
+from .models import *
 
 urlpatterns = patterns(
     '',

@@ -3,7 +3,7 @@ from django.views.decorators.cache import cache_page
 from django.views.generic.list_detail import object_list
 from django.views.generic.list import ListView
 
-from academic.people.models import *
+from .models import *
 
 urlpatterns = patterns(
     '',

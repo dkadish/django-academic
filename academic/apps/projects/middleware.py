@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 
-from academic.projects.models import Project
+from .models import Project
 
 class ProjectRedirectMiddleware(object):
     def process_view(self, request, view_func, view_args, view_kwargs):

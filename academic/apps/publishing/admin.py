@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core import validators
 from django.utils.translation import ugettext_lazy as _
 
-from academic.publishing.models import *
+from .models import *
 
 class ConferenceEditionAdmin(admin.ModelAdmin):
     actions = ('prepare_proceedings',)

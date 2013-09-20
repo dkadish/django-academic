@@ -2,8 +2,8 @@ from django.views.generic.list import ListView
 from django.db.models import Count
 from django.core.cache import cache
 
-from academic.publishing.models import Publication
-from academic.people.models import Person
+from .models import Publication
+from ..people.models import Person
 
 import datetime
 

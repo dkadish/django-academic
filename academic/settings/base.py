@@ -114,11 +114,11 @@ TEMPLATE_CONTEXT_PROCESSORS = [
 
 INSTALLED_APPS = [
     #core
-    "academic.people",
-    "academic.organizations",
-    "academic.projects",
-    "academic.publishing",
-    "academic.content",
+    "academic.apps.people",
+    "academic.apps.organizations",
+    "academic.apps.projects",
+    "academic.apps.publishing",
+    "academic.apps.content",
 
     # external
     'south',
