@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.views.decorators.cache import cache_page
-from django.views.generic.list_detail import object_list
+# from django.views.generic.list_detail import object_list
 from django.views.generic.list import ListView
 
 from .models import *
@@ -12,7 +12,9 @@ urlpatterns = patterns(
     # object_list|regroup }}. Thus, let's stick to the old approach for now.
 
     url(r'^$',
-        cache_page(object_list),
+        ListView.as_view(
+                template_name='academic/person_list.html',
+                model=Person),
         {'template_name': 'academic/person_list.html',
          'queryset': Person.objects.all(),
          'extra_context': {
@@ -22,8 +24,8 @@ urlpatterns = patterns(
         name='academic_people_person_list'),
 
     url(r'^\#person-(?P<object_id>\d+)$',
-        cache_page(ListView.as_view(
+        ListView.as_view(
                 template_name='academic/person_list.html',
-                model=Person)),
+                model=Person),
         name='academic_people_person_detail'),
 )

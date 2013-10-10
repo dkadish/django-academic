@@ -133,6 +133,12 @@ class Person(models.Model):
         related_name='people',
         blank=True,
         null=True)
+    title = models.CharField(
+        _('Title'),
+        help_text=_('Non-academic title (e.g. Director of a lab, etc.)'),
+        max_length=200,
+        blank=True,
+        null=True)
     first_name = models.CharField(
         _('First Name'),
         max_length=64)
