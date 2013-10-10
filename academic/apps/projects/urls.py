@@ -26,9 +26,9 @@ urlpatterns = patterns(
 #         name='academic_projects_project_detail'),
 
     url(r'^$',
-        cache_page(ListView.as_view(
+        ListView.as_view(
                 queryset=Project.objects.order_by('topic'),
-                template_name='academic/project_list.html')),
+                template_name='academic/project_list.html'),
         name='academic_projects_project_list'),
 )
 
