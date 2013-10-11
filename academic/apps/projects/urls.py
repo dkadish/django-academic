@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 from django.views.decorators.cache import cache_page
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 from .models import *
 
@@ -19,11 +20,12 @@ urlpatterns = patterns(
 #          'queryset': Topic.objects.all() },
 #         name='academic_projects_topic_list'),
 #         
-#     url(r'^projects/(?P<slug>[-\w]+)/$',
-#         cache_page(object_detail),
-#         {'template_name': 'academic/project_detail.html',
-#          'queryset': Project.objects.all() },
-#         name='academic_projects_project_detail'),
+    url(r'^projects/(?P<slug>[-\w]+)/$',
+        DetailView.as_view(
+                queryset=Project.objects.all(),
+                template_name='academic/project_detail.html'
+                           ),
+        name='academic_projects_project_detail'),
 
     url(r'^$',
         ListView.as_view(
