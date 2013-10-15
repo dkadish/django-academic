@@ -13,10 +13,10 @@ class PublicationListView(ListView):
     publication_stats = cache.get('publication_stats')
     top_authors = cache.get('top_authors')
     
-    def get_queryset(self):
-        return Publication.objects.exclude(
-            real_type__name='conference proceedings').exclude(
-            real_type__name='journal')
+#     def get_queryset(self):
+#         return Publication.objects.exclude(
+#             real_type__name='conference proceedings').exclude(
+#             real_type__name='journal')
 
     def get_top_authors(self):
         if self.top_authors is None:

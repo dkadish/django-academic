@@ -12,25 +12,25 @@ from .views import PublicationListView
 urlpatterns = patterns(
     '',
 
-    url(r'^v/(?P<slug>[-\w]+)\.bib$',
-        cache_page(PlainTextDetailView.as_view(
-                model=Publication,
-                template_name='academic/publication_detail.bib')),
-        name='academic_publishing_publication_detail_bibtex'),
+#     url(r'^v/(?P<slug>[-\w]+)\.bib$',
+#         cache_page(PlainTextDetailView.as_view(
+#                 model=Publication,
+#                 template_name='academic/publication_detail.bib')),
+#         name='academic_publishing_publication_detail_bibtex'),
 
     url(r'^v/(?P<slug>[-\w]+)$',
-        cache_page(DetailView.as_view(
+        DetailView.as_view(
                 model=Publication,
-                template_name='academic/publication_detail.html')),
+                template_name='academic/publication_detail.html'),
         name='academic_publishing_publication_detail'),
 
-    url(r'^bibtex$',
-        cache_page(PlainTextListView.as_view(
-                model=Publication,
-                template_name='academic/publication_list.bib')),
-        name='academic_publishing_publication_list_bibtex'),
+#     url(r'^bibtex$',
+#         cache_page(PlainTextListView.as_view(
+#                 model=Publication,
+#                 template_name='academic/publication_list.bib')),
+#         name='academic_publishing_publication_list_bibtex'),
     
     url(r'^$',
-        cache_page(PublicationListView.as_view()),
+        PublicationListView.as_view(model=Publication),
         name='academic_publishing_publication_list'),
     )
