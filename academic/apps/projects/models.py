@@ -140,6 +140,15 @@ class Project(models.Model):
         blank=True,
         help_text='Optional related topics.',
         related_name='secondary_projects')
+    image = models.ImageField(
+        upload_to='cover_images',
+        verbose_name=_('Cover Image'),
+        help_text='An image to display with the project.',
+        null=True,
+        blank=True)
+    image_caption = models.TextField(
+        null=True,
+        blank=True)
 
     def __unicode__(self):
         return self.short_title
@@ -147,3 +156,33 @@ class Project(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('academic_projects_project_detail', (), {'slug': self.slug})
+
+class Role(models.Model):
+    class Meta:
+        ordering = ('order',)
+        
+    name = models.CharField(
+        _('Rank name'),
+        help_text=_('E.g., Project Leader'),
+        max_length=64)
+    plural_name = models.CharField(
+        _('Rank plural name'),
+        help_text=_('E.g., Project Leaders'),
+        max_length=64)
+    order = models.PositiveSmallIntegerField(
+        _('Role order'),
+        help_text=_('Lower values mean higher importance.'
+                    ' I.e., put 0 for a "Project Leader"'),
+        default=0)
+
+    def __unicode__(self):
+        return self.name
+
+class Involvement(models.Model):
+    class Meta:
+        ordering = ('order',)
+        pass
+    project = models.ForeignKey(Project)
+    person = models.ForeignKey(Person)
+    role = models.ForeignKey(Role)
+    order = models.PositiveSmallIntegerField()

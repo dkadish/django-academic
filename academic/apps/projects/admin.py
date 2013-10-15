@@ -6,7 +6,14 @@ from django.utils.translation import ugettext_lazy as _
 from .models import *
 from academic.settings import *
 
+class InvolvementInline(admin.TabularInline):
+    verbose_name = 'Involvement'
+    verbose_name_plural = 'Involvements'
+    model = Involvement
+    extra = 5
+    
 class ProjectAdmin(admin.ModelAdmin):
+    inlines = (InvolvementInline,)
     prepopulated_fields = {
 	'slug': ('short_title',)
     }
@@ -19,8 +26,9 @@ class ProjectAdmin(admin.ModelAdmin):
                     'excerpt',
                     'topic',
                     'description',
-                    'people',
-                    'publications'),}),
+                    'publications',
+                    'image',
+                    'image_caption'),}),
         (_('Extra information'), {
                 'classes': (
                     'collapse closed collapse-closed',),
@@ -34,7 +42,6 @@ class ProjectAdmin(admin.ModelAdmin):
         )
     filter_horizontal = [
         'downloads',
-        'people',
         'related_topics',
         'organizations',
         'sponsors',
@@ -64,3 +71,7 @@ class TopicAdmin(admin.ModelAdmin):
         'highlight_order',
         'description']
 admin.site.register(Topic, TopicAdmin)
+
+class RoleAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Role, RoleAdmin)

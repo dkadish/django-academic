@@ -155,6 +155,12 @@ class Person(models.Model):
         _('E-mail'),
         blank=True,
         null=True)
+    phone = models.CharField(
+        _('Phone Number'),
+        help_text='Phone number, using "-" as a separator (e.g. 123-456-7890)',
+        max_length=64,
+        blank=True,
+        null=True)
     web_page = models.URLField(
         _('Web page'),
         blank=True,
