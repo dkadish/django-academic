@@ -20,7 +20,7 @@ urlpatterns = patterns(
 #          'queryset': Topic.objects.all() },
 #         name='academic_projects_topic_list'),
 #         
-    url(r'^projects/(?P<slug>[-\w]+)/$',
+    url(r'^(?P<slug>[-\w]+)/$',
         DetailView.as_view(
                 queryset=Project.objects.all(),
                 template_name='academic/project_detail.html'
