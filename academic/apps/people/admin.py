@@ -40,6 +40,7 @@ class PersonAdmin(admin.ModelAdmin):
         'first_name',
         'last_name',
         'e_mail',)
+    prepopulated_fields = {"slug": ('first_name','last_name')}
 admin.site.register(Person, PersonAdmin)
 
 class PersonInlineForm(forms.ModelForm):

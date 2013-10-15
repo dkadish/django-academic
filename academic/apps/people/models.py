@@ -149,6 +149,8 @@ class Person(models.Model):
     last_name = models.CharField(
         _('Last Name'),
         max_length=64)
+    slug = models.SlugField(
+        _('Slug'))
     e_mail = models.EmailField(
         _('E-mail'),
         blank=True,
@@ -171,7 +173,7 @@ class Person(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('academic_people_person_detail', (), {'object_id': self.pk})
+        return ('academic_people_person_detail', (), {'slug': self.slug})
 
     def _get_picture_url(self):
         if self.has_picture:
@@ -215,7 +217,3 @@ class Person(models.Model):
             r = '%s %s.' % (r, self.mid_name[0])
         return '%s %s' % (r, self.last_name)
     sname = property(_get_sname)
-
-    def _get_slug(self):
-        return (u'%s-%s' % (self.first_name[0], self.last_name)).lower()
-    slug = property(_get_slug)
