@@ -27,6 +27,9 @@ admin.site.register(Publisher, OrganizationAdmin)
 admin.site.register(School, OrganizationAdmin)
 
 class SponsorAdmin(OrganizationAdmin):
+    list_display_links = (
+        'acronym',
+        'name')
     list_display = (
         'order',
         'acronym',
