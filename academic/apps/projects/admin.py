@@ -21,8 +21,11 @@ class ProjectAdmin(admin.ModelAdmin):
         (None, {
                 'fields': (
                     'short_title',
-		    'slug',
+                    'slug',
                     'title',
+                    'start_year',
+                    'end_year',
+                    'presented_year',
                     'excerpt',
                     'topic',
                     'description',
