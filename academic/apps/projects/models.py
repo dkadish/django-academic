@@ -92,6 +92,9 @@ class Project(models.Model):
         auto_now_add=True)
     modified = models.DateTimeField(
         auto_now=True)
+    start_year = models.SmallIntegerField(default=2000, help_text='The year in which the project was started.')
+    end_year = models.SmallIntegerField(default=2000, help_text='The year in which the project was finished.')
+    presented_year = models.SmallIntegerField(default=2000, help_text='The year in which the project was shown for the first time.')
     excerpt = models.CharField(
         max_length=1024,
         null=True,

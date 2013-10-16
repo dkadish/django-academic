@@ -172,7 +172,7 @@ class Person(models.Model):
     picture = models.ImageField(
         _('Profile picture'),
         max_length=200,
-	upload_to=PEOPLE_DEFAULT_DIRECTORY,
+	    upload_to=PEOPLE_DEFAULT_DIRECTORY,
         default=PEOPLE_DEFAULT_PICTURE,
         blank=True,
         null=True)
