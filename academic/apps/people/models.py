@@ -97,13 +97,13 @@ class Person(models.Model):
             'last_name',
             'first_name', ]
 
-
     objects_all = models.Manager()
     objects_visitors = VisitorManager()
     objects_alumni = AlumniManager()
     objects_past_visitors = PastVisitorManager()
     objects = PersonManager()
-    
+
+    listed = models.BooleanField(default=True, help_text='Should this person be listed publicly on the web site?')
     affiliation = models.ManyToManyField(
         Organization,
         verbose_name=_('Affiliations'),
