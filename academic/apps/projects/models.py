@@ -116,7 +116,10 @@ class Project(models.Model):
     people = models.ManyToManyField(
         Person,
         help_text='People involved in this project.',
-        related_name='projects')
+        related_name='projects',
+        through='Involvement',
+        blank=True,
+        null=True)
     organizations = models.ManyToManyField(
         Organization,
         help_text='Organizations involved other than the lab.',
@@ -152,6 +155,10 @@ class Project(models.Model):
     image_caption = models.TextField(
         null=True,
         blank=True)
+    
+    @property
+    def involvements(self):
+        return Involvement.objects.filter(project=self)
 
     def __unicode__(self):
         return self.short_title
@@ -160,16 +167,17 @@ class Project(models.Model):
     def get_absolute_url(self):
         return ('academic_projects_project_detail', (), {'slug': self.slug})
 
+
 class Role(models.Model):
     class Meta:
         ordering = ('order',)
         
     name = models.CharField(
-        _('Rank name'),
+        _('Role name'),
         help_text=_('E.g., Project Leader'),
         max_length=64)
     plural_name = models.CharField(
-        _('Rank plural name'),
+        _('Role plural name'),
         help_text=_('E.g., Project Leaders'),
         max_length=64)
     order = models.PositiveSmallIntegerField(
@@ -183,9 +191,12 @@ class Role(models.Model):
 
 class Involvement(models.Model):
     class Meta:
-        ordering = ('order',)
-        pass
+        ordering = ('role', 'order',)
+    
     project = models.ForeignKey(Project)
     person = models.ForeignKey(Person)
     role = models.ForeignKey(Role)
     order = models.PositiveSmallIntegerField()
+    
+    def __unicode__(self):
+        return '%s - %s - %s' %(self.project, self.person, self.role)

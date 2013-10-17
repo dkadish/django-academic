@@ -7,7 +7,8 @@ from .models import *
 
 class OrganizationAdmin(admin.ModelAdmin):
     list_display_links = (
-        'acronym',)
+        'acronym',
+        'name')
     list_display = (
         'acronym',
         'name',

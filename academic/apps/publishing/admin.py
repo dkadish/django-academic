@@ -21,7 +21,7 @@ class ConferenceEditionAdmin(admin.ModelAdmin):
             if ce.month != '':
                 cp.month = ce.month
             cp.save()
-        
+    
     list_display_links = (
         'conference',)
     list_display = (
@@ -78,7 +78,15 @@ class PaperAdmin(PublicationAdmin):
             'academic/admin/js/inline_author_helper.js', )
     pass
 
+
+class ConferenceProceedingsInline(admin.StackedInline):
+    verbose_name = 'Proceeding'
+    verbose_name_plural = 'Proceedings'
+    model = ConferenceProceedings
+    
 class ConferenceArticleAdmin(PaperAdmin):
+    inlines = (AuthorshipInline,
+               ConferenceProceedingsInline,)
     fieldsets = (
         (None, {
                 'fields': (

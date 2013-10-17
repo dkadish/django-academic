@@ -78,3 +78,7 @@ admin.site.register(Topic, TopicAdmin)
 class RoleAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Role, RoleAdmin)
+
+class InvolvementAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Involvement, InvolvementAdmin)

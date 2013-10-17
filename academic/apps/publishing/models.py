@@ -120,6 +120,7 @@ class Publication(models.Model):
 		'-year',
 		'-month']
     
+    listed = models.BooleanField(default=True, help_text='Should this publication be listed publicly on the web site?')
     title = models.CharField(
         _('Title'),
         max_length=1024)
@@ -303,7 +304,6 @@ class JournalArticle(Publication):
     journal = models.ForeignKey(
         Journal)
 
-
 class ConferenceProceedings(Book):
     class Meta:
         verbose_name = _('Proceedings')
@@ -316,6 +316,7 @@ class ConferenceProceedings(Book):
 
 
 class ConferenceArticle(Publication):
+    #TODO: add elements so that it doesn't have ot reference the proceedings object.
     class Meta:
         verbose_name_plural = _('Conference papers')
         verbose_name = _('Conference paper')
@@ -391,3 +392,11 @@ class Reviewing(models.Model):
     person = models.ForeignKey(Person)
     publication = models.ForeignKey(PhdThesis)
     order = models.PositiveSmallIntegerField()
+
+class Exhibition(Publication):
+    location = models.CharField(max_length=250, blank=True, null=True)
+    medium = models.CharField(max_length=250, blank=True, null=True)
+    show = models.CharField(max_length=250, blank=True, null=True)
+
+class Catalogue(Book):
+    pass
