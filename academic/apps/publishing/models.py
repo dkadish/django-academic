@@ -120,7 +120,7 @@ class Publication(models.Model):
 		'-year',
 		'-month']
     
-    listed = models.BooleanField(default=True, help_text='Should this publication be listed publicly on the web site?')
+    listed = models.BooleanField(default=True, blank=True, help_text='Should this publication be listed publicly on the web site?')
     title = models.CharField(
         _('Title'),
         max_length=1024)
@@ -229,7 +229,6 @@ class Authorship(models.Model):
     person = models.ForeignKey(Person)
     publication = models.ForeignKey(Publication)
     order = models.PositiveSmallIntegerField()
-    
 
 class Book(Publication):
     editors = models.ManyToManyField(

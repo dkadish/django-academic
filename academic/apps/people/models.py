@@ -201,7 +201,7 @@ class Person(models.Model):
     has_picture = property(_has_picture)
 
     def __unicode__(self):
-        return u'%s' % self.name
+        return u'%s, %s' %(self.last_name, self.first_name)
 
     def _get_name(self):
         r = '%s' % self.first_name
@@ -223,3 +223,8 @@ class Person(models.Model):
             r = '%s %s.' % (r, self.mid_name[0])
         return '%s %s' % (r, self.last_name)
     sname = property(_get_sname)
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return ("first_name__icontains", "last_name_icontains",)
+
