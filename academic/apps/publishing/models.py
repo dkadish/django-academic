@@ -182,6 +182,10 @@ class Publication(models.Model):
         db_index=True)
     
     objects = InheritanceManager()
+    
+    @property
+    def authorships(self):
+        return Authorship.objects.filter(publication=self)
 
     def _get_first_author(self):
         authorships = self.authorship_set.all()
@@ -316,7 +320,7 @@ class ConferenceProceedings(Book):
 
 
 class ConferenceArticle(Publication):
-    #TODO: add elements so that it doesn't have ot reference the proceedings object.
+    #TODO: add elements so that it doesn't have to reference the proceedings object.
     class Meta:
         verbose_name_plural = _('Conference papers')
         verbose_name = _('Conference paper')

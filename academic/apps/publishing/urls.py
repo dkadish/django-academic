@@ -7,7 +7,7 @@ from academic.views import PlainTextDetailView
 from academic.views import PlainTextListView
 
 from .models import *
-from .views import PublicationListView
+from .views import PublicationListView, PublicationListByTypeView
 
 urlpatterns = patterns(
     '',
@@ -31,6 +31,6 @@ urlpatterns = patterns(
 #         name='academic_publishing_publication_list_bibtex'),
     
     url(r'^$',
-        PublicationListView.as_view(model=Publication),
+        PublicationListByTypeView.as_view(model=Publication),
         name='academic_publishing_publication_list'),
     )

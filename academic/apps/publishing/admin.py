@@ -79,17 +79,17 @@ class PaperAdmin(PublicationAdmin):
     pass
 
 
-class ConferenceProceedingsInline(admin.StackedInline):
-    verbose_name = 'Proceeding'
-    verbose_name_plural = 'Proceedings'
-    model = ConferenceProceedings
+# class ConferenceProceedingsInline(admin.StackedInline):
+#     verbose_name = 'Proceeding'
+#     verbose_name_plural = 'Proceedings'
+#     model = ConferenceProceedings
     
 class ConferenceArticleAdmin(PaperAdmin):
-    inlines = (AuthorshipInline,
-               ConferenceProceedingsInline,)
+    inlines = (AuthorshipInline,)
     fieldsets = (
         (None, {
                 'fields': (
+                    'listed',
                     'crossref',
                     'title',
                     'year',
@@ -193,6 +193,7 @@ class ConferenceProceedingsAdmin(BookAdmin):
     fieldsets = (
         (None, {
                 'fields': (
+                    'listed',
                     'conference_edition',
                     'title',
                     'year',

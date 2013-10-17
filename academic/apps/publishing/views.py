@@ -6,6 +6,8 @@ from .models import Publication
 from ..people.models import Person
 
 import datetime
+from .models import Book, JournalArticle, ConferenceArticle,\
+    Exhibition, Catalogue, Thesis
 
 class PublicationListView(ListView):
     template_name = 'academic/publication_list.html'
@@ -58,4 +60,17 @@ class PublicationListView(ListView):
         context = super(PublicationListView, self).get_context_data(**kwargs)
         context['publication_stats'] = self.get_publications_stats()
         context['top_authors'] = self.get_top_authors()
+        return context
+
+class PublicationListByTypeView(ListView):
+    template_name = 'academic/publication_list.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(PublicationListByTypeView, self).get_context_data(**kwargs)
+        context['book_list'] = Book.objects.filter(listed=True)
+        context['journal_article_list'] = JournalArticle.objects.filter(listed=True)
+        context['conference_article_list'] = ConferenceArticle.objects.filter(listed=True)
+        context['exhibition_list'] = Exhibition.objects.filter(listed=True)
+        context['catalogue_list'] = Catalogue.objects.filter(listed=True)
+        context['thesis_list'] = Thesis.objects.filter(listed=True)
         return context
