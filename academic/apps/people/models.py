@@ -195,6 +195,14 @@ class Person(models.Model):
         return _('(no photo)')
     photo.allow_tags = True
 
+    def thumbnail(self):
+        if self.has_picture:
+            return '<img src="%s" alt="%s" style="max-width: 75px; max-height: 75px">' % (
+                self.picture.url,
+                self.name)
+        return _('(no photo)')
+    thumbnail.allow_tags = True
+
     def _has_picture(self):
         return not isinstance(self.picture.size, str) \
             and self.picture.size > 0
