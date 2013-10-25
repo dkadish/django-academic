@@ -89,7 +89,8 @@ class PersonManager(models.Manager):
             current=True,
             visitor=False,
             alumni=False,
-            public=True)
+            public=True).order_by('rank__order', 'first_name', 'last_name')
+            #TODO: by existing meta
 
 class Person(models.Model):
     """

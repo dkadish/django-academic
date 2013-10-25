@@ -15,9 +15,8 @@ urlpatterns = patterns(
     url(r'^past/$',
         ListView.as_view(
                 template_name='academic/person_list.html',
-                model=Person),
+                queryset=Person.objects_past.all()),
         {
-         'queryset': Person.objects_past.all(),
          'extra_context': {
                 'past': True,
                 'visitors': Person.objects_past_visitors.all().order_by('rank')} },
@@ -32,9 +31,8 @@ urlpatterns = patterns(
     url(r'^$',
         ListView.as_view(
                 template_name='academic/person_list.html',
-                model=Person),
+                queryset=Person.objects.all()),
         {
-         'queryset': Person.objects.all(),
          'extra_context': {
                 'visitors': Person.objects_visitors.all().order_by('rank'),
                 },
