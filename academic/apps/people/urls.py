@@ -11,7 +11,17 @@ urlpatterns = patterns(
 
     # switching to class-based views causes crazy things with {{
     # object_list|regroup }}. Thus, let's stick to the old approach for now.
-
+                       
+    url(r'^past/$',
+        ListView.as_view(
+                template_name='academic/person_list.html',
+                model=Person),
+        {
+         'queryset': Person.objects_past.all(),
+         'extra_context': {
+                'past': True,
+                'visitors': Person.objects_past_visitors.all().order_by('rank')} },
+        name='academic_past_people_person_list'),
 
     url(r'^(?P<slug>[-\w\d]+)/$',
         DetailView.as_view(
@@ -23,11 +33,13 @@ urlpatterns = patterns(
         ListView.as_view(
                 template_name='academic/person_list.html',
                 model=Person),
-        {'template_name': 'academic/person_list.html',
+        {
          'queryset': Person.objects.all(),
          'extra_context': {
-                'alumni': Person.objects_alumni.all(),
                 'visitors': Person.objects_visitors.all().order_by('rank'),
-                'past_visitors': Person.objects_past_visitors.all().order_by('rank')} },
+                },
+        },
         name='academic_people_person_list'),
+    
+                       
 )

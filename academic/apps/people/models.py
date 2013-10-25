@@ -69,6 +69,16 @@ class PastVisitorManager(models.Manager):
             current=False,
             public=True)
 
+class PastTeamManager(models.Manager):
+    '''
+    People who visited the lab in the past.
+    '''
+    def get_query_set(self):
+        return super(PastTeamManager, self).get_query_set().filter(
+            current=False,
+            visitor=False,
+            alumni=False,
+            public=True)
 
 class PersonManager(models.Manager):
     '''
@@ -101,6 +111,7 @@ class Person(models.Model):
     objects_visitors = VisitorManager()
     objects_alumni = AlumniManager()
     objects_past_visitors = PastVisitorManager()
+    objects_past = PastTeamManager()
     objects = PersonManager()
 
     listed = models.BooleanField(default=True, help_text='Should this person be listed publicly on the web site?')
