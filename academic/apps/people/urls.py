@@ -5,6 +5,7 @@ from django.views.generic.list import ListView
 
 from .models import *
 from django.views.generic.detail import DetailView
+from .views import PeopleListView, PastPeopleListView
 
 urlpatterns = patterns(
     '',
@@ -12,15 +13,7 @@ urlpatterns = patterns(
     # switching to class-based views causes crazy things with {{
     # object_list|regroup }}. Thus, let's stick to the old approach for now.
                        
-    url(r'^past/$',
-        ListView.as_view(
-                template_name='academic/person_list.html',
-                queryset=Person.objects_past.all()),
-        {
-         'extra_context': {
-                'past': True,
-                'visitors': Person.objects_past_visitors.all().order_by('rank')} },
-        name='academic_past_people_person_list'),
+    url(r'^past/$', PastPeopleListView.as_view(),  name='academic_past_people_person_list'),
 
     url(r'^(?P<slug>[-\w\d]+)/$',
         DetailView.as_view(
@@ -28,16 +21,7 @@ urlpatterns = patterns(
                 model=Person),
         name='academic_people_person_detail'),
                        
-    url(r'^$',
-        ListView.as_view(
-                template_name='academic/person_list.html',
-                queryset=Person.objects.all()),
-        {
-         'extra_context': {
-                'visitors': Person.objects_visitors.all().order_by('rank'),
-                },
-        },
-        name='academic_people_person_list'),
+    url(r'^$', PeopleListView.as_view(), name='academic_people_person_list'),
     
                        
 )
