@@ -6,6 +6,7 @@ from django.core import validators
 from django.utils.translation import ugettext_lazy as _
 
 from .models import *
+from basic.books.admin import BookAdmin
 
 class ConferenceEditionAdmin(admin.ModelAdmin):
     actions = ('prepare_proceedings',)
@@ -222,3 +223,12 @@ class ConferenceProceedingsAdmin(BookAdmin):
         'volume',
         'number')
 admin.site.register(ConferenceProceedings, ConferenceProceedingsAdmin)
+
+class CatalogueAdmin(BookAdmin):
+    pass
+admin.site.register(Catalogue, CatalogueAdmin)
+
+class ExhibitionAdmin(PublicationAdmin):
+    pass
+admin.site.register(Exhibition, ExhibitionAdmin)
+    

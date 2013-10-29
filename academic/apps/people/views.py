@@ -7,7 +7,7 @@ from django.views.generic.list import ListView
 from .models import Person
 
 class PeopleListView(ListView):
-    model = Person
+    queryset = Person.objects.all()
     
     def get_context_data(self, **kwargs):
         context = super(PeopleListView, self).get_context_data(**kwargs)
