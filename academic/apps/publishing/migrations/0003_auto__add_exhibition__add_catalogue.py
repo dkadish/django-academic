@@ -8,15 +8,28 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Publication.listed'
-        db.add_column(u'publishing_publication', 'listed',
-                      self.gf('django.db.models.fields.BooleanField')(default=True),
-                      keep_default=False)
+        # Adding model 'Exhibition'
+        db.create_table(u'publishing_exhibition', (
+            (u'publication_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['publishing.Publication'], unique=True, primary_key=True)),
+            ('location', self.gf('django.db.models.fields.CharField')(max_length=250, null=True, blank=True)),
+            ('medium', self.gf('django.db.models.fields.CharField')(max_length=250, null=True, blank=True)),
+            ('show', self.gf('django.db.models.fields.CharField')(max_length=250, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'publishing', ['Exhibition'])
+
+        # Adding model 'Catalogue'
+        db.create_table(u'publishing_catalogue', (
+            (u'book_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['publishing.Book'], unique=True, primary_key=True)),
+        ))
+        db.send_create_signal(u'publishing', ['Catalogue'])
 
 
     def backwards(self, orm):
-        # Deleting field 'Publication.listed'
-        db.delete_column(u'publishing_publication', 'listed')
+        # Deleting model 'Exhibition'
+        db.delete_table(u'publishing_exhibition')
+
+        # Deleting model 'Catalogue'
+        db.delete_table(u'publishing_catalogue')
 
 
     models = {
@@ -50,6 +63,7 @@ class Migration(SchemaMigration):
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
+            'listed': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'mid_name': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True', 'blank': 'True'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True', 'blank': 'True'}),
             'picture': ('django.db.models.fields.files.ImageField', [], {'default': "'academic/people/default.jpg'", 'max_length': '200', 'null': 'True', 'blank': 'True'}),
@@ -97,10 +111,10 @@ class Migration(SchemaMigration):
             'chapter': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'pages': ('django.db.models.fields.CharField', [], {'max_length': '32', 'null': 'True', 'blank': 'True'})
         },
-#         u'publishing.catalogue': {
-#             'Meta': {'ordering': "['-year', '-month']", 'object_name': 'Catalogue', '_ormbases': [u'publishing.Book']},
-#             u'book_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['publishing.Book']", 'unique': 'True', 'primary_key': 'True'})
-#         },
+        u'publishing.catalogue': {
+            'Meta': {'ordering': "['-year', '-month']", 'object_name': 'Catalogue', '_ormbases': [u'publishing.Book']},
+            u'book_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['publishing.Book']", 'unique': 'True', 'primary_key': 'True'})
+        },
         u'publishing.coadvisorship': {
             'Meta': {'ordering': "('order',)", 'object_name': 'Coadvisorship'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -143,13 +157,13 @@ class Migration(SchemaMigration):
             'person': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['people.Person']"}),
             'publication': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['publishing.Book']"})
         },
-#         u'publishing.exhibition': {
-#             'Meta': {'ordering': "['-year', '-month']", 'object_name': 'Exhibition', '_ormbases': [u'publishing.Publication']},
-#             'location': ('django.db.models.fields.CharField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'}),
-#             'medium': ('django.db.models.fields.CharField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'}),
-#             u'publication_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['publishing.Publication']", 'unique': 'True', 'primary_key': 'True'}),
-#             'show': ('django.db.models.fields.CharField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'})
-#         },
+        u'publishing.exhibition': {
+            'Meta': {'ordering': "['-year', '-month']", 'object_name': 'Exhibition', '_ormbases': [u'publishing.Publication']},
+            'location': ('django.db.models.fields.CharField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'}),
+            'medium': ('django.db.models.fields.CharField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'}),
+            u'publication_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['publishing.Publication']", 'unique': 'True', 'primary_key': 'True'}),
+            'show': ('django.db.models.fields.CharField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'})
+        },
         u'publishing.journal': {
             'Meta': {'ordering': "['-year', '-month']", 'object_name': 'Journal', '_ormbases': [u'publishing.Book']},
             u'book_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['publishing.Book']", 'unique': 'True', 'primary_key': 'True'})
