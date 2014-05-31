@@ -21,7 +21,7 @@ urlpatterns = patterns(
                 model=Person),
         name='academic_people_person_detail'),
                        
-    url(r'^$', PeopleListView.as_view(), name='academic_people_person_list'),
+    url(r'^$', StudentFacultyListView.as_view(), name='academic_people_person_list'),
     
                        
 )

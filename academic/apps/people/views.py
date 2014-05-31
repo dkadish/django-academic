@@ -6,13 +6,26 @@ from django.views.generic.list import ListView
 
 from .models import Person
 
+DIRECTOR = 'Dulic'
+
 class PeopleListView(ListView):
-    queryset = Person.objects.exclude(last_name='Dulic')
+    queryset = Person.objects.exclude(last_name=DIRECTOR)
     
     def get_context_data(self, **kwargs):
         context = super(PeopleListView, self).get_context_data(**kwargs)
         context['visitors_list'] = Person.objects_visitors.all()
-        context['directors_list'] = Person.objects.filter(last_name='Dulic')
+        context['directors_list'] = Person.objects.filter(last_name=DIRECTOR)
+        return context
+    
+class StudentFacultyListView(PeopleListView):
+    queryset = Person.objects.exclude(last_name=DIRECTOR)
+    
+    def get_context_data(self, **kwargs):
+        context = super(PeopleListView, self).get_context_data(**kwargs)
+        context['directors_list'] = Person.objects.filter(last_name=DIRECTOR)
+        context['faculty_list'] = Person.objects.exclude(last_name=DIRECTOR).filter(rank__name__contains='professor')
+        context['students_list'] = Person.objects.exclude(last_name=DIRECTOR).exclude(rank__name__contains='professor')
+        context['visitors_list'] = Person.objects_visitors.all()
         return context
     
 class PastPeopleListView(PeopleListView):
