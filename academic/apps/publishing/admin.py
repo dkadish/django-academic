@@ -150,6 +150,7 @@ class CoadvisorshipInline(admin.TabularInline):
 
 class ThesisAdmin(PublicationAdmin):
     inlines = (
+        AuthorshipInline,
         AdvisorshipInline,
         CoadvisorshipInline)
 
@@ -161,6 +162,7 @@ class ReviewingInline(admin.TabularInline):
 
 class PhdThesisAdmin(ThesisAdmin):
     inlines = (
+        AuthorshipInline,
         AdvisorshipInline,
         CoadvisorshipInline,
         ReviewingInline)
@@ -185,7 +187,19 @@ class BookAdmin(PublicationAdmin):
         'year',
         'volume',
         'number',
-        'edition')
+        'edition',
+        'listed')
+        
+    actions = ('toggle_listed',)
+    def toggle_listed(self, request, queryset):
+        for book in queryset:
+            if book.listed:
+              book.listed = False
+            else:
+              book.listed = True
+             
+            book.save()
+                        
 admin.site.register(Book, BookAdmin)
 admin.site.register(Journal, BookAdmin)
 admin.site.register(BookChapter, BookAdmin)
