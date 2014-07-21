@@ -65,9 +65,9 @@ class HighlightedProjectManager(models.Manager):
 class Project(models.Model):
     class Meta:
         ordering = [
-            'presented_year',
-            'start_year',
-            'end_year']
+            '-start_year',
+            '-presented_year',
+            '-end_year']
 
     objects = models.Manager()
     highlighted = HighlightedProjectManager()

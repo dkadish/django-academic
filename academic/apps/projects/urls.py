@@ -29,7 +29,7 @@ urlpatterns = patterns(
 
     url(r'^$',
         ListView.as_view(
-                queryset=Project.objects.order_by('topic'),
+                queryset=Project.objects.all(),
                 template_name='academic/project_list.html'),
         name='academic_projects_project_list'),
 )
