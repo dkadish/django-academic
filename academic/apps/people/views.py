@@ -14,7 +14,6 @@ class PeopleListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(PeopleListView, self).get_context_data(**kwargs)
         context['visitors_list'] = Person.objects_visitors.all()
-        context['directors_list'] = Person.objects.filter(last_name=DIRECTOR)
         return context
     
 class StudentFacultyListView(PeopleListView):
@@ -43,6 +42,7 @@ class PastStudentFacultyListView(StudentFacultyListView):
     
     def get_context_data(self, **kwargs):
         context = super(PastStudentFacultyListView, self).get_context_data(**kwargs)
+        context['directors_list'] = Person.objects.none()
         context['context'] = context.copy()
         context['visitors_list'] = Person.objects_past_visitors.all()
         context['past'] = True
